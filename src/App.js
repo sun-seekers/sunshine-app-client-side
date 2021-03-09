@@ -5,19 +5,20 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Header from './components/Header.js';
-import HomePage from './HomePage/HomePage';
-import AuthPage from './AuthPage/AuthPage';
-import SearchPage from './searchPage/SearchPage';
-import DetailsPage from './DetailsPage/DetailsPage';
-import AboutPage from './AboutPage/AboutPage';
+import Header from './Components/Header.js';
+import HomePage from './HomePage/HomePage.js';
+import AuthPage from './AuthPage/AuthPage.js';
+import SearchPage from './SearchPage/SearchPage.js';
+import DetailsPage from './DetailsPage/DetailsPage.js';
+import AboutPage from './AboutPage/AboutPage.js';
 import TripsPage from './TripsPage/TripsPage.js';
 import PrivateRoute from './Components/PrivateRoute.js';
 import { getUserFromStorage } from './LocalStorageUtils.js';
 
 export default class App extends Component {
   state = {
-    token: getUserFromStorage().token,
+    token: 'token'
+    // getUserFromStorage().token
   }
 
   render() {
@@ -25,10 +26,11 @@ export default class App extends Component {
       token,
 
     } = this.state
+    console.log('token:', token);
     return (
-      <main>
+      <div>
         <Router>
-          <Header token={token} handleLogOut={this.handleLogOut} />
+          <Header token={token} />
           <Switch>
             <Route
               path="/"
@@ -58,7 +60,7 @@ export default class App extends Component {
               render={(routerProps) => <SearchPage {...routerProps} />}
             />
             <PrivateRoute
-              path="/search/:id"
+              path="/search/:city"
               exact
               token={token}
               render={(routerProps) => <DetailsPage {...routerProps} />}
@@ -72,7 +74,7 @@ export default class App extends Component {
           </Switch>
         </Router>
 
-      </main>
+      </div>
     )
   }
 }

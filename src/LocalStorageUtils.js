@@ -2,16 +2,15 @@ const USER = 'USER';
 
 
 export function getUserFromStorage() {
-    const user = localStorage.getItem(USER);
-
-    if (user) return JSON.parse(user);
-
-    localStorage.setItem(USER, {
+    if (localStorage.getItem(USER)) return JSON.parse(localStorage.getItem(USER));
+    const newUser = {
         name: '',
         token: '',
         zip: 0
-    })
-    return '';
+    }
+    setToLocalStorage(newUser)
+    // localStorage.setItem(USER, )
+    return newUser;
 }
 
 export function setToLocalStorage(user) {
