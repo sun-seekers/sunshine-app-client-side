@@ -17,9 +17,13 @@ import { getUserFromStorage } from './LocalStorageUtils.js';
 
 export default class App extends Component {
   state = {
-    token: 'token'
-    // getUserFromStorage().token
+    token: getUserFromStorage().token
+
   }
+  handleToken = (token) => {
+    this.setState({ token });
+  }
+
 
   render() {
     const {
@@ -40,12 +44,12 @@ export default class App extends Component {
             <Route
               path="/login"
               exact
-              render={(routerProps) => <AuthPage token={token} {...routerProps} />}
+              render={(routerProps) => <AuthPage token={token} handleToken={this.handleToken} {...routerProps} />}
             />
             <Route
               path="/signup"
               exact
-              render={(routerProps) => <AuthPage token={token} {...routerProps} />}
+              render={(routerProps) => <AuthPage token={token} handleToken={this.handleToken} {...routerProps} />}
             />
             <Route
               path="/about"
@@ -57,7 +61,7 @@ export default class App extends Component {
               path="/search"
               exact
               token={token}
-              render={(routerProps) => <SearchPage {...routerProps} />}
+              render={(routerProps) => <SearchPage token={token} {...routerProps} />}
             />
             <PrivateRoute
               path="/search/:city"
