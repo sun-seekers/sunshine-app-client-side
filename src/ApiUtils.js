@@ -13,8 +13,8 @@ export async function logInUser(email, password) {
 
     return response.body.token;
 }
-export async function getWeatherRadius(zipcode, distance, token) {
-    const weatherReport = await request.get(`${URL}/api/sunshine?zip_code=${zipcode}&distance=${distance}`).set('Authorization', token);
+export async function getWeatherRadius(zipcode, distance, token, sortBy, order, day) {
+    const weatherReport = await request.get(`${URL}/api/sunshine?zip_code=${zipcode}&distance=${distance}&sort_by${sortBy}&sort_order=${order}&day=${day}`).set('Authorization', token);
     return weatherReport.body;
 }
 export async function getOneTrip(city, token) {
