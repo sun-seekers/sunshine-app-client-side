@@ -1,5 +1,5 @@
 import request from 'superagent';
-const URL = 'http://localhost:3000'
+const URL = 'https://blooming-scrubland-63495.herokuapp.com'
 
 export async function signUpUser(name, email, password) {
     const response = await request.post(`${URL}/auth/signup`)
