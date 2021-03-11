@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
-import { getOneTrip } from '../ApiUtils'
+import { Link } from 'react-router-dom';
 
 export default class DetailsPage extends Component {
     state = {
-        trip: {}
+        locations: this.props.locations,
+        location: {}
     }
     componentDidMount = async () => {
-        const trip = await getOneTrip(this.props.match.params.city, this.props.token);
-        this.setState({ trip });
+        console.log(this.state);
+        const location = this.state.locations.find(location => location.zip_code === this.props.match.params.zip)
+        this.setState({ location })
     }
 
-
-
-
     render() {
-        console.log(this.state.trip);
+        console.log('state', this.state.location, 'props', this.props.locations);
         return (
-            <div>
-                Details
-            </div>
+            <main>
+                <div className="details-con">
+
+                <Link to='/search'>Back to search</Link>
+                </div>
+            </main>
         )
     }
 }
