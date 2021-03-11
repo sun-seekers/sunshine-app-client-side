@@ -68,13 +68,13 @@ export default class App extends Component {
               path="/details/:zip"
               exact
               token={token}
-              render={(routerProps) => <DetailsPage {...routerProps} locations={locations}/>}
+              render={(routerProps) => <DetailsPage token={token} locations={locations} {...routerProps} />}
             />
             <PrivateRoute
               path="/trips"
               exact
               token={token}
-              render={(routerProps) => <TripsPage {...routerProps} />}
+              render={(routerProps) => <TripsPage token={token} {...routerProps} />}
             />
           </Switch>
         </Router>
