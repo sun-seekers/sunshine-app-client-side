@@ -66,3 +66,13 @@
 .no-results {
   
 }
+
+.details-con {
+    border: solid 2px black;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    background-color: pink;
+    display: grid;
+    text-align: center;
+}

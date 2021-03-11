@@ -17,6 +17,13 @@ export default class DetailsPage extends Component {
         return (
             <main>
                 <div className="details-con">
+                    <p>Location:{this.state.location.city}, {this.state.location.state}</p>
+                    <p>Cloud Cover:{this.state.location.clouds}%</p>
+                    <p>Date:{this.state.location.date}</p>
+                    <p>Distance:{this.state.location.distance} miles</p>
+                    <p>Forecast:{this.state.location.forecast}</p>
+                    <p>Temperature:{this.state.location.temperature}° F</p>
+                    
 
                 <Link to='/search'>Back to search</Link>
                 </div>
