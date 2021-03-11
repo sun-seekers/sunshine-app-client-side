@@ -19,6 +19,7 @@ export async function getWeatherRadius(zipcode, distance, token, sortBy, order, 
     const weatherReport = await request.get(`${URL}/api/sunshine?zip_code=${zipcode}&distance=${distance}&sort_by${sortBy}&sort_order=${order}&day=${day}`).set('Authorization', token);
     return weatherReport.body;
 }
+<<<<<<< HEAD
 export async function getFaveTrips(token) {
     const response = await request.get(`${URL}/api/trips`).set('Authorization', token);
     return response.body;
@@ -27,6 +28,11 @@ export async function getFaveTrips(token) {
 
 export async function getOneTrip(zip, token) {
     const response = await request.get(`${URL}/api/trips/${zip}`).set('Authorization', token);
+=======
+
+export async function getOneTrip(zip, token) {
+    const response = await request.get(`${URL}/api/trip/${zip}`).set('Authorization', token);
+>>>>>>> be9e40ee9663a1da89b9e1d8e4f6f4638f41664e
     return response.body;
 }
 

@@ -5,8 +5,18 @@ export default class Header extends Component {
     render() {
         return (
             <header>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/about">About</NavLink>
+                <NavLink
+                    to="/"
+                    activeClassName='hidden'
+                    >
+                    Home
+                </NavLink>
+                <NavLink
+                    to="/about"
+                    activeClassName='hidden'
+                >
+                    About
+                </NavLink>
                 {
                     this.props.token && <>
                         <NavLink to='/search'>Search</NavLink>
