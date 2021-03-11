@@ -31,6 +31,10 @@
   color: black;
   position: relative;
   overflow: hidden;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-3ZLViE9YgwY%2FUfpgFrefuiI%2FAAAAAAAAHhM%2FzEn3qCzk9Jg%2Fs1600%2Fsunshine_145918109.jpg&f=1&nofb=1');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .hidden {
@@ -56,50 +60,84 @@ main {
 }
 
 @keyframes sunny-gradient-spin {
-/* we'll use these later */
+  /* we'll use these later */
+}
+
+.spinner{
+  width: 100%;
 }
 
 form {
   max-width: 100%;
 }
 
-input, button {
-  text-decoration: none;
-  width: 100%;
+/* this sets up some defaults */
+select, button, input, a {
   margin-bottom: 15px;
   padding: 15px;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+  text-align: center;
+}
 
+input::placeholder {
+  color: white;
+}
+
+input, button {
+  background-color: gold;
+  border: 3px solid white;
+}
+
+button {
+  font-weight: bold;
+  color: darkgoldenrod;
 }
 
 select {
-  margin-bottom: 15px;
   width: 33%;
-  padding: 5px;
+  font-size: 1em;
+  color: goldenrod;
+}
+
+.search-results-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* border-radius: 20px; */
+  overflow: auto;
+  background-color: white;
+  padding: 20px;
+  align-items: center;
+  max-height: 75vh;
 }
 
 .search-location {
-  border: solid 2px black;
-  border-radius: 15px;
-  margin: 10px;
-  padding: 5px;
-  background-color: pink;
-  cursor: pointer;
-  transition: .2s ease-in-out;
+  border: solid 3px gold;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: white;
+  color: goldenrod;
+  /* border-radius: 20px; */
+  /* cursor: pointer;
+  transition: .2s ease-in-out; */
 }
 
-.search-location:hover {
+.welcome {
+  max-height: 65vh;
+  overflow: auto;
+  padding: 20px;
+}
+
+/* .search-location:hover {
   transform: scale(1.5);
-}
+} */
 
-.search-field {
-  display: flex;
-  flex-wrap: wrap;
-  
-}
-
-.link-style {
-  text-decoration: none;
-  /* cursor: pointer; */
+.sort-by {
+  font-style: italic;
 }
 
 .hawaii {

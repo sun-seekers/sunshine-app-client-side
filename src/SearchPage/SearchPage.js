@@ -53,21 +53,44 @@ export default class SearchPage extends Component {
     render() {
         const day = new Date();
         const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const {
+            loading,
+            distance,
+            locations,
+            hawaii,
+            sortBy,
+            zipcode
+        } = this.state
         return (
             <main>
                 <form onSubmit={this.handleSubmitChange}>
-                    <input value={this.state.zipcode} placeholder='Your Zipcode' required onChange={this.handleZipcodeChange} />
-                    <select value={this.state.distance} onChange={this.handleDistanceChange}>
+                    <input
+                        value={zipcode}
+                        placeholder='Enter Your Zipcode'
+                        required onChange={this.handleZipcodeChange} />
+                    <select
+                        value={distance}
+                        onChange={this.handleDistanceChange} >
+                        <option value={50}>Distance</option>
                         <option value={50}>50 miles</option>
+                        <option value={75}>75 miles</option>
                         <option value={100}>100 miles</option>
+                        <option value={125}>100 miles</option>
                         <option value={150}>150 miles</option>
+                        <option value={175}>175 miles</option>
+                        <option value={200}>200 miles</option>
                     </select>
-                    <select value={this.state.sortBy} onChange={this.handleSortChange}>
+                    <select
+                        value={sortBy}
+                        onChange={this.handleSortChange} >
+                        <option value={'clouds'}>Select</option>
                         <option value={'clouds'}>clouds</option>
-                        <option value={'temperature'}>Temperature</option>
-                        <option value={'distance'}>Distance</option>
+                        <option value={'temperature'}>temperature</option>
+                        <option value={'distance'}>distance</option>
                     </select>
-                    <select value={this.state.day} onChange={this.handleDateChange}>
+                    <select
+                        value={day}
+                        onChange={this.handleDateChange} >
                         <option value={0}>Today</option>
                         <option value={1}>{weekdays[day.getDay() + 1]}</option>
                         <option value={2}>{weekdays[day.getDay() + 2]}</option>
@@ -76,14 +99,17 @@ export default class SearchPage extends Component {
                         <option value={5}>{weekdays[day.getDay() + 5]}</option>
                         <option value={6}>{weekdays[day.getDay() + 6]}</option>
                     </select>
-                    <button>Search!</button>
+                    <button>Find Better Weather!</button>
                 </form>
-                {this.state.loading === true
-                    && <Spinner />}
-                {this.state.loading === false
-                    && <div className='search-field'>
-                        <SearchComponent locations={this.state.locations} hawaii={this.state.hawaii} />
-                    </div>}
+                {loading === true
+                    && <Spinner />
+                }
+                {loading === false && locations.length !== 0
+                    && <SearchComponent
+                        locations={locations}
+                        hawaii={hawaii}
+                        sortBy={sortBy} />
+                }
             </main >
 
         )
