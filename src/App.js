@@ -9,28 +9,29 @@ import Header from './Components/Header.js';
 import HomePage from './HomePage/HomePage.js';
 import AuthPage from './AuthPage/AuthPage.js';
 import SearchPage from './SearchPage/SearchPage.js';
-import DetailsPage from './DetailsPage/DetailsPage.js';
 import AboutPage from './AboutPage/AboutPage.js';
 import TripsPage from './TripsPage/TripsPage.js';
 import PrivateRoute from './Components/PrivateRoute.js';
+import DetailsPage from './DetailsPage/DetailsPage';
 import { getUserFromStorage } from './LocalStorageUtils.js';
 
 export default class App extends Component {
   state = {
-    token: getUserFromStorage().token
-
+    token: getUserFromStorage().token,
+    locations: []
   }
   handleToken = (token) => {
     this.setState({ token });
   }
 
+  handleLocations = (locations) => this.setState({ locations })
 
   render() {
+    console.log(this.state.locations);
     const {
       token,
-
+      locations
     } = this.state
-    console.log('token:', token);
     return (
       <div>
         <Router>
@@ -61,19 +62,19 @@ export default class App extends Component {
               path="/search"
               exact
               token={token}
-              render={(routerProps) => <SearchPage token={token} {...routerProps} />}
+              render={(routerProps) => <SearchPage token={token} {...routerProps} locations={locations} handleLocations={this.handleLocations} />}
             />
             <PrivateRoute
-              path="/search/:city"
+              path="/details/:zip"
               exact
               token={token}
-              render={(routerProps) => <DetailsPage {...routerProps} />}
+              render={(routerProps) => <DetailsPage token={token} locations={locations} {...routerProps} />}
             />
             <PrivateRoute
               path="/trips"
               exact
               token={token}
-              render={(routerProps) => <TripsPage {...routerProps} />}
+              render={(routerProps) => <TripsPage token={token} {...routerProps} />}
             />
           </Switch>
         </Router>

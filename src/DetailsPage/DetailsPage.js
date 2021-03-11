@@ -1,24 +1,38 @@
 import React, { Component } from 'react'
-// import { getOneTrip } from '../ApiUtils'
+import { Link } from 'react-router-dom';
+import { addATrip } from '../ApiUtils.js';
+import DetailComponent from './DetailComponent.js';
 
 export default class DetailsPage extends Component {
-    // state = {
-    //     trip: {}
-    // }
-    // componentDidMount = async () => {
-    //     const trip = await getOneTrip(this.props.match.params.city, this.props.token);
-    //     this.setState({ trip });
-    // }
+    state = {
+        locations: this.props.locations,
+        location: {}
+    }
+    componentDidMount = async () => {
+        console.log(this.state);
+        const location = this.state.locations.find(location => location.zip_code === this.props.match.params.zip)
+        this.setState({ location })
+    }
+    handleTripAdd = async (location) => {
+        await addATrip({
+            city: location.city,
+            distance: location.distance,
+            state: location.state,
+            zip_code: location.zip_code,
 
-
-
+        }, this.props.token)
+    }
 
     render() {
-        // console.log(this.state.trip);
+        console.log('state', this.state.location, 'props', this.props.locations);
         return (
-            <div>
-                Details
-            </div>
+            <main>
+                <div className="details-con">
+
+                    <Link to='/search'>Back to search</Link>
+                    <DetailComponent location={this.state.location} handleTripAdd={this.handleTripAdd} />
+                </div>
+            </main>
         )
     }
 }
