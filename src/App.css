@@ -1,41 +1,78 @@
+/* font import */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Sonsie+One&display=swap');
+
+/* this only applies to screens wider than 800px */
+@media only screen and (min-width: 800px) {
+  .App {
+  background-color: magenta;
+  }
+}
+
+/* here we declare our variables to be used throughout the file */
+:root {
+  --display: 'Sonsie One', cursive;
+  --copy: 'Open Sans', sans-serif; 
+}
+
+/* sensible defaults */
+* {
+  box-sizing: border-box;
+  align-self: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* this styles the main app container located in app.js */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  max-height: 100vh;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* this is something that I don't quite understand but it makes font size more consistent among viewing sizes (phone, desktop, etc.) */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
+  position: relative;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+h1, h2, h3 {
+  font-family: var(--display);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+  font-family: var(--copy);
 }
+
+/* since we set up each component class to have a root of <main>, we can style them all here and have a consistent experience throughout the app */
+main {
+  /* this constrains the size to the height of the viewport */
+  max-height: 100vh;
+  /* if there is more content that fits in the height, it will be scrollable */
+  overflow: auto;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+
+@keyframes sunny-gradient-spin {
+/* we'll use these later */
+}
+
+form {
+  max-width: 100%;
+}
+
+input, button {
+  text-decoration: none;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 15px;
+
+}
+
+select {
+  margin-bottom: 15px;
+  width: 33%;
+  padding: 5px;
+}
+
 .search-location {
   border: solid 2px black;
   border-radius: 15px;
@@ -45,9 +82,11 @@
   cursor: pointer;
   transition: .2s ease-in-out;
 }
+
 .search-location:hover {
   transform: scale(1.5);
 }
+
 .search-field {
   display: flex;
   flex-wrap: wrap;
@@ -64,5 +103,5 @@
 }
 
 .no-results {
-  
+
 }
