@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { getWeatherRadius } from '../ApiUtils.js';
 import SearchComponent from './SearchComponent.js';
 import Spinner from '../Components/Spinner.js';
+import '../App.css';
 
 export default class SearchPage extends Component {
     state = {
