@@ -1,5 +1,6 @@
 import request from 'superagent';
 const URL = 'https://blooming-scrubland-63495.herokuapp.com'
+// const URL = 'http://localhost:3000'
 
 export async function signUpUser(name, email, password) {
     const response = await request.post(`${URL}/auth/signup`)
@@ -30,7 +31,8 @@ export async function getOneTrip(zip, token) {
 }
 
 export async function addATrip(trip, token) {
-    const response = await request.post(`${URL}/api/trips`).set('Authorization', token).send({ trip });
+    console.log(trip);
+    const response = await request.post(`${URL}/api/trips`).set('Authorization', token).send( trip );
     return response.body;
 }
 

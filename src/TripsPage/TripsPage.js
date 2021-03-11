@@ -9,15 +9,16 @@ export default class TripsPage extends Component {
     componentDidMount = async () => {
         await this.getTrips()
     }
+
     getTrips = async () => {
         const trips = await getFaveTrips(this.props.token);
         this.setState({ trips });
     }
     render() {
-        console.log(this.state.trips)
         return (
             <main>
                 <SearchComponent locations={this.state.trips} />
+                <button onClick={() => this.handleTripAdd(this.state.location)}>Remove Trip</button>
 
             </main>
         )
