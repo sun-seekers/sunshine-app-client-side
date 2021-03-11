@@ -11,11 +11,6 @@ export default class Header extends Component {
                     activeClassName='hidden' >
                     Home
                 </NavLink>
-                <NavLink
-                    to="/about"
-                    activeClassName='hidden' >
-                    About
-                </NavLink>
                 {
                     this.props.token && <>
                         <NavLink to='/search'>Search</NavLink>
@@ -24,11 +19,24 @@ export default class Header extends Component {
                 }
                 {
                     !this.props.token && <>
-                        <NavLink to='/signup'>Sign Up</NavLink>
+                        <NavLink
+                            to='/signup'
+                            activeClassName='hidden' >
+                            Sign Up
+                            </NavLink>
                         <NavLink to='/login'>Log In</NavLink>
                     </>
                 }
-
+                <NavLink
+                    to="/about"
+                    activeClassName='hidden' >
+                    About
+                </NavLink>
+                <NavLink
+                    onClick={this.handleLogOut}
+                    to="/login">
+                    Log Out
+                </NavLink>
             </header>
 
         )

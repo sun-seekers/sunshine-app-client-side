@@ -5,10 +5,10 @@ import { getUserFromStorage } from '../LocalStorageUtils.js';
 export default class HomePage extends Component {
     state = {
         name: getUserFromStorage().name
-
-
     }
+
     handleHomeClick = () => this.props.history.push('/signup');
+    
     handleSearchClick = () => this.props.history.push('/search');
 
     render() {
