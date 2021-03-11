@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { setToLocalStorage } from '../LocalStorageUtils'
 
 export default class Header extends Component {
+    handleLogOut = () => setToLocalStorage('')
+        
     render() {
         return (
             <header>
@@ -13,8 +16,20 @@ export default class Header extends Component {
                 </NavLink>
                 {
                     this.props.token && <>
-                        <NavLink to='/search'>Search</NavLink>
-                        <NavLink to='/trips'>Trips</NavLink>
+                        <NavLink
+                            to='/search'>
+                            Search
+                        </NavLink>
+                        <NavLink
+                            to='/trips'>
+                            Trips
+                        </NavLink>
+                        <NavLink
+                            onClick={this.handleLogOut}
+                            activeClassName='hidden'
+                            to="/login">
+                            Log Out
+                        </NavLink>
                     </>
                 }
                 {
@@ -24,18 +39,17 @@ export default class Header extends Component {
                             activeClassName='hidden' >
                             Sign Up
                             </NavLink>
-                        <NavLink to='/login'>Log In</NavLink>
+                        <NavLink
+                            to='/login'
+                            activeClassName='hidden' >
+                            Log In
+                        </NavLink>
                     </>
                 }
                 <NavLink
                     to="/about"
                     activeClassName='hidden' >
                     About
-                </NavLink>
-                <NavLink
-                    onClick={this.handleLogOut}
-                    to="/login">
-                    Log Out
                 </NavLink>
             </header>
 
