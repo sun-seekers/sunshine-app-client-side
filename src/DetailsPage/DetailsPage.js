@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { addATrip, getFaveTrips } from '../ApiUtils.js';
+import { addATrip, deleteTrip, getFaveTrips } from '../ApiUtils.js';
 
 
 export default class DetailsPage extends Component {
@@ -38,25 +38,31 @@ export default class DetailsPage extends Component {
         const isTrip = this.state.trips.find(trip => trip.zip_code === Number(location.zip_code));
         return Boolean(isTrip);
     }
+    handleDelete = async (zipCode) => {
+        await deleteTrip(zipCode, this.props.token)
+        this.props.history.push('/search')
+
+    }
 
     render() {
         console.log(this.state.trips)
         console.log(this.state.location)
         return (
             <main>
+                {/* <Link to='/search'>Back to search</Link> */}
                 <div className="details-con">
 
-                    <p>Location:{this.state.location.city}, {this.state.location.state}</p>
-                    <p>Cloud Cover: {this.state.location.clouds}%</p>
-                    <p>Date: {this.state.location.date}</p>
-                    <p>Distance: {this.state.location.distance} miles</p>
-                    <p>Forecast: {this.state.location.forecast}</p>
-                    <p>Temperature: {this.state.location.temperature}° F</p>
-                    <p>{this.isATrip(this.state.location)
-                        ? '☀️'
-                        : <button onClick={() => this.handleTripAdd(this.state.location)}>Add To Trips!</button>}</p>
+                    <h3>{this.state.location.city}, {this.state.location.state}</h3>
+                    <p>{this.state.location.date}</p>
+                    <p>{this.state.location.temperature}° F</p>
+                    <p>{this.state.location.forecast} ({this.state.location.clouds}% cloud cover)</p>
 
-                    <Link to='/search'>Back to search</Link>
+                    <p>Approx. {this.state.location.distance} miles away</p>
+                    <p>{this.isATrip(this.state.location)
+                        ? <button onClick={() => this.handleDelete(this.state.location.zip_code)}>Remove Trip</button>
+                        : <button onClick={() => this.handleTripAdd(this.state.location)}>Add Trip</button>}</p>
+
+
                 </div>
             </main>
         )

@@ -18,7 +18,7 @@ export default class TripsPage extends Component {
         return (
             <main>
                 <SearchComponent locations={this.state.trips} />
-                <button onClick={() => this.handleTripAdd(this.state.location)}>Remove Trip</button>
+
 
             </main>
         )
