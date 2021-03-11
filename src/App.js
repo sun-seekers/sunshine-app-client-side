@@ -68,11 +68,7 @@ export default class App extends Component {
               path="/details/:zip"
               exact
               token={token}
-<<<<<<< HEAD
               render={(routerProps) => <DetailsPage token={token} locations={locations} {...routerProps} />}
-=======
-              render={(routerProps) => <DetailsPage {...routerProps} locations={locations}/>}
->>>>>>> be9e40ee9663a1da89b9e1d8e4f6f4638f41664e
             />
             <PrivateRoute
               path="/trips"
