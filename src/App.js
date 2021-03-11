@@ -33,7 +33,7 @@ export default class App extends Component {
       locations
     } = this.state
     return (
-      <div>
+      <div className='App'>
         <Router>
           <Header token={token} />
           <Switch>
