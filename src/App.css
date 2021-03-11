@@ -72,7 +72,7 @@ form {
 }
 
 /* this sets up some defaults */
-select, button, input, a {
+select, button, input {
   margin-bottom: 15px;
   padding: 15px;
   width: 100%;
@@ -89,6 +89,34 @@ input::placeholder {
 input, button {
   background-color: gold;
   border: 3px solid white;
+}
+
+a, .log-out {
+  text-decoration: none;
+  color: white;
+}
+
+header {
+  background-color: rgb(255, 255, 255, .5);
+  display: flex;
+  justify-content: space-evenly;
+  height: 2em;
+}
+
+header>a, .log-out {
+  color: darkgoldenrod;
+
+}
+
+.about-div {
+  display: flex;
+  width: 100%;
+}
+
+.about-image {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
 }
 
 button {

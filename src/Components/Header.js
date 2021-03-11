@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { setToLocalStorage } from '../LocalStorageUtils'
 
 export default class Header extends Component {
+    handleLogOut = () => setToLocalStorage('')
+        
     render() {
         return (
             <header>
@@ -11,24 +14,43 @@ export default class Header extends Component {
                     activeClassName='hidden' >
                     Home
                 </NavLink>
+                {
+                    this.props.token && <>
+                        <NavLink
+                            to='/search'>
+                            Search
+                        </NavLink>
+                        <NavLink
+                            to='/trips'>
+                            Trips
+                        </NavLink>
+                        <NavLink
+                            onClick={this.handleLogOut}
+                            activeClassName='hidden'
+                            to="/login">
+                            Log Out
+                        </NavLink>
+                    </>
+                }
+                {
+                    !this.props.token && <>
+                        <NavLink
+                            to='/signup'
+                            activeClassName='hidden' >
+                            Sign Up
+                            </NavLink>
+                        <NavLink
+                            to='/login'
+                            activeClassName='hidden' >
+                            Log In
+                        </NavLink>
+                    </>
+                }
                 <NavLink
                     to="/about"
                     activeClassName='hidden' >
                     About
                 </NavLink>
-                {
-                    this.props.token && <>
-                        <NavLink to='/search'>Search</NavLink>
-                        <NavLink to='/trips'>Trips</NavLink>
-                    </>
-                }
-                {
-                    !this.props.token && <>
-                        <NavLink to='/signup'>Sign Up</NavLink>
-                        <NavLink to='/login'>Log In</NavLink>
-                    </>
-                }
-
             </header>
 
         )

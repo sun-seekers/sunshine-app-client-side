@@ -11,8 +11,11 @@ export default class AuthPage extends Component {
     };
 
     handleNameChange = e => this.setState({ name: e.target.value });
+
     handleEmailChange = e => this.setState({ email: e.target.value });
+
     handlePasswordChange = e => this.setState({ password: e.target.value });
+
     handleSubmit = async e => {
         e.preventDefault();
         const {
@@ -20,10 +23,10 @@ export default class AuthPage extends Component {
             email,
             password
         } = this.state;
+
         if (this.props.history.location.pathname === '/signup') {
             const user = await signUpUser(name, email, password);
-            console.log(user);
-            setToLocalStorage(user);
+            setToLocalStorage({ name, token: user.token });
             this.props.handleToken(user.token);
             this.props.history.push('/search');
         } else {
