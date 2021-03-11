@@ -7,14 +7,13 @@ export default class Header extends Component {
             <header>
                 <NavLink
                     to="/"
-                    activeClassName='hidden'
-                    >
+                    exact
+                    activeClassName='hidden' >
                     Home
                 </NavLink>
                 <NavLink
                     to="/about"
-                    activeClassName='hidden'
-                >
+                    activeClassName='hidden' >
                     About
                 </NavLink>
                 {
