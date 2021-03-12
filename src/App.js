@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect
 } from 'react-router-dom';
 import Header from './Components/Header.js';
 import HomePage from './HomePage/HomePage.js';
@@ -11,7 +12,6 @@ import AuthPage from './AuthPage/AuthPage.js';
 import SearchPage from './SearchPage/SearchPage.js';
 import AboutPage from './AboutPage/AboutPage.js';
 import TripsPage from './TripsPage/TripsPage.js';
-import PrivateRoute from './Components/PrivateRoute.js';
 import DetailsPage from './DetailsPage/DetailsPage';
 import { getUserFromStorage } from './LocalStorageUtils.js';
 
@@ -27,7 +27,6 @@ export default class App extends Component {
   handleLocations = (locations) => this.setState({ locations })
 
   render() {
-    console.log(this.state.locations);
     const {
       token,
       locations
@@ -57,28 +56,47 @@ export default class App extends Component {
               exact
               render={(routerProps) => <AboutPage token={token} {...routerProps} />}
             />
-
-            <Route
-              path="/search"
-              exact
-              token={token}
-              render={(routerProps) => <SearchPage token={token} {...routerProps} locations={locations} handleLocations={this.handleLocations} />}
+            <Route 
+                exact
+                path='/search' 
+                render={
+                  (routerProps) =>
+                  token 
+                      ? <SearchPage
+                        token={token}
+                        locations={locations}
+                        handleLocations={this.handleLocations}
+                        {...routerProps} />
+                    : <Redirect to="/" />
+                  } 
             />
-            <PrivateRoute
-              path="/details/:zip"
-              exact
-              token={token}
-              render={(routerProps) => <DetailsPage token={token} locations={locations} {...routerProps} />}
+            <Route 
+                exact
+                path="/details/:zip"
+                render={
+                  (routerProps) =>
+                  token 
+                      ? <DetailsPage
+                        token={token}
+                        locations={locations}
+                        {...routerProps} />
+                    : <Redirect to="/" />
+                  } 
             />
-            <PrivateRoute
-              path="/trips"
-              exact
-              token={token}
-              render={(routerProps) => <TripsPage token={token} {...routerProps} />}
+            <Route 
+                exact
+                path="/trips"
+                render={
+                  (routerProps) =>
+                  token 
+                      ? <TripsPage
+                        token={token}
+                        {...routerProps} />
+                    : <Redirect to="/" />
+                  } 
             />
           </Switch>
         </Router>
-
       </div>
     )
   }

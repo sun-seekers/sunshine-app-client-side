@@ -36,9 +36,9 @@ export default class DetailsPage extends Component {
         return Boolean(isTrip);
     }
 
-    haveVisited = (location) => {
-        const isVisit = this.state.trips.find(trip => trip.zip_code === Number(location.zip_code));
-        return Boolean(isVisit);
+    haveVisited = async (location) => {
+         const isVisit = await this.state.trips.filter(trip => trip.zip_code === Number(location.zip_code));
+        return isVisit;
     }
 
     handleDelete = async (zipCode) => {
@@ -48,6 +48,7 @@ export default class DetailsPage extends Component {
 
     handleVisited = async (zipCode) => {
         await haveVisited(zipCode, this.props.token)
+        await deleteTrip(zipCode, this.props.token)
         this.props.history.push('/search')
     }
 
@@ -55,23 +56,23 @@ export default class DetailsPage extends Component {
         const { location } = this.state
         return (
             <main>
-                {/* <Link to='/search'>Back to search</Link> */}
-                <div className="details-con">
-                    <h3>
-                        {location.city}, {location.state}
-                    </h3>
-                    <p>
-                        {location.date}
-                    </p>
-                    <p>
-                        {location.temperature}° F
+                    <div className="details-con">
+                        <h3>
+                            {location.city}, {location.state}
+                        </h3>
+                        <p>
+                            {location.date}
                         </p>
-                    <p>
-                        {location.forecast} ({location.clouds}% cloud cover)
-                    </p>
-                    <p>
-                        Approx. {location.distance} miles away
+                        <p>
+                            {location.temperature}° F
                         </p>
+                        <p>
+                            {location.forecast} ({location.clouds}% cloud cover)
+                    </p>
+                        <p>
+                            Approx. {location.distance} miles away
+                        </p>
+                    </div>
                     {this.isATrip(location)
                         ? <button
                             onClick={() => this.handleDelete(location.zip_code)}>
@@ -82,13 +83,13 @@ export default class DetailsPage extends Component {
                             Add Trip
                             </button>
                     }
-                    {this.isATrip(location)
+                {this.isATrip(location)
+                    && this.haveVisited(location)
                         && <button
                             onClick={() => this.handleVisited(location.zip_code)}>
-                            Visited?
-                            </button>
+                            I went!
+                        </button>
                     }
-                </div>
             </main>
         )
     }

@@ -31,15 +31,12 @@ export default class AuthPage extends Component {
             this.props.history.push('/search');
         } else {
             const user = await logInUser(email, password);
-            // setToLocalStorage(user);
+            setToLocalStorage({ name, token: user.token });
             this.props.handleToken(user.token);
             this.props.history.push('/search');
         }
-
-
-
-
     }
+    
     render() {
         const {
             name,

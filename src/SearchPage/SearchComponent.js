@@ -9,7 +9,6 @@ export default class SearchComponent extends Component {
             hawaii,
             sortBy
         } = this.props;
-        console.log(hawaii);
         return (
             <div className='search-results-container' >
                 { locations !== []

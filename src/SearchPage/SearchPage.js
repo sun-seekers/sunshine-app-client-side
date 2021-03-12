@@ -7,7 +7,7 @@ import '../App.css';
 export default class SearchPage extends Component {
     state = {
         zipcode: '',
-        distance: 0,
+        distance: 49,
         sortBy: 'asc',
         day: 0,
         current_zip: this.props.match.params.zip,
