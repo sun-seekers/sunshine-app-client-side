@@ -8,6 +8,11 @@ export default class Header extends Component {
     render() {
         return (
             <header>
+                 <NavLink
+                    to="/about"
+                    activeClassName='hidden' >
+                    About
+                </NavLink>
                 <NavLink
                     to="/"
                     exact
@@ -32,8 +37,8 @@ export default class Header extends Component {
                         </NavLink>
                     </>
                 }
-                {
-                    !this.props.token && <>
+                {/* {
+                     !this.props.token && <>
                         <NavLink
                             to='/signup'
                             activeClassName='hidden' >
@@ -45,12 +50,8 @@ export default class Header extends Component {
                             Log In
                         </NavLink>
                     </>
-                }
-                <NavLink
-                    to="/about"
-                    activeClassName='hidden' >
-                    About
-                </NavLink>
+                } */}
+               
             </header>
 
         )
