@@ -20,6 +20,7 @@
   align-self: center;
   margin: 0px;
   padding: 0px;
+  font-family: var(--copy);
 }
 
 /* this styles the main app container located in app.js */
@@ -100,7 +101,8 @@ header {
   background-color: rgb(255, 255, 255, .5);
   display: flex;
   justify-content: space-evenly;
-  height: 2em;
+  font-size: 1em;
+  padding: 10px;
 }
 
 header>a, .log-out {
@@ -160,6 +162,16 @@ select {
   padding: 20px;
 }
 
+.welcome>p {
+  margin-bottom: 10px;
+}
+
+.disclosure {
+  font-style: italic;
+  font-size: .5em;
+  margin: 5px;
+}
+
 /* .search-location:hover {
   transform: scale(1.5);
 } */
@@ -178,12 +190,16 @@ select {
 }
 
 .details-con {
-    border: solid 2px black;
-    border-radius: 15px;
-    margin: 10px;
-    padding: 5px;
-    background-color: pink;
-    display: grid;
-    text-align: center;
+  background-color: white;
+  padding: 20px;
+}
 
+.hawaii {
+  width: 75px;
+  margin-left: 20px;
+}
+
+.no-results {
+  display: flex;
+  font-style: italic;
 }

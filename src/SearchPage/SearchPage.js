@@ -12,22 +12,19 @@ export default class SearchPage extends Component {
         day: 0,
         current_zip: this.props.match.params.zip,
         loading: false,
-        hawaii: false
+        hawaii: false,
+        display: false
     }
-
-    // componentDidUpdate() {
-    //     if (!this.props.token) this.props.history.push('/')
-    // }
 
     searchLocations = async (order) => {
         const {
             zipcode,
             distance,
             sortBy,
-            day
+            day,
         } = this.state;
 
-        this.setState({ hawaii: false })
+        this.setState({ hawaii: false, display: true })
         
         const locations = await getWeatherRadius(zipcode, distance, this.props.token, sortBy, order, day);
 
@@ -51,15 +48,12 @@ export default class SearchPage extends Component {
         
         this.setState({ loading: true })
         
-
         this.state.sortBy === 'temperature' ? await this.searchLocations('desc') : await this.searchLocations('asc');
        
-
         this.setState({ loading: false })
     }
 
     render() {
-        console.log(this.state.hawaii);
         const day = new Date();
         const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         const {
@@ -67,7 +61,8 @@ export default class SearchPage extends Component {
             distance,
             hawaii,
             sortBy,
-            zipcode, 
+            zipcode,
+            display
         } = this.state
         return (
             <main>
@@ -110,7 +105,8 @@ export default class SearchPage extends Component {
                 {loading === true
                     && <Spinner />
                 }
-                {loading === false 
+                {loading === false
+                    && display === true
                     && <SearchComponent
                         locations={this.props.locations}
                         hawaii={hawaii}

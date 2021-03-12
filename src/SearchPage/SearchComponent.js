@@ -45,13 +45,12 @@ export default class SearchComponent extends Component {
                 }
                 { hawaii === true
                     && <div className="no-results">
-                        No results found - try widening your search or...
+                        No results found ☁️ try widening your search or...
                             <a href='https://www.expedia.com/Hotel-Search?packageType=fh&searchProduct=hotel&c=b396b3b9-8ad0-45cb-a2a2-737609c47c9e&adults=2&origin=Portland,+OR,+United+States+of+America+(PDX-Portland+Intl.)&originId=5784656&ftla=PDX&regionId=213&destination=Hawaii,+United+States+of+America&destinationId=213&ttla=HNL&startDate=2021-06-07&endDate=2021-06-14&sort=recommended&tripType=ROUND_TRIP&cabinClass=COACH&misId=AgiIkvnj7Jba9h0QpL-Ntd-6rfqpASDXgv4g~ARIEGgIIAhowCAESFgoDUERYGNCI4QIqCjIwMjEtMDYtMDcSFAoDSE5MGNUBKgoyMDIxLTA2LTE0'
                             target='_blank'
                             rel="noreferrer"
                             >
-                            <img src="http://placekitten.com/200" alt="tropical destination" className="hawaii" />
-                        Click here!
+                            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fartrprnr.com%2Fwp-content%2Fuploads%2F2019%2F02%2FBucas-Grande-SQ.png&f=1&nofb=1" alt="tropical destination" className="hawaii" />
                         </a>
                     </div>
                 }
