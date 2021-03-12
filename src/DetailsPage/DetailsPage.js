@@ -82,9 +82,8 @@ export default class DetailsPage extends Component {
                             Add Trip
                             </button>
                     }
-                    {this.haveVisited(location)
-                        ? '☀️'
-                        : <button
+                    {this.isATrip(location)
+                        && <button
                             onClick={() => this.handleVisited(location.zip_code)}>
                             Visited?
                             </button>
