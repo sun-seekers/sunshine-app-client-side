@@ -13,7 +13,7 @@ export async function logInUser(email, password) {
     const response = await request.post(`${URL}/auth/signin`)
         .send({ email, password })
 
-    return response.body.token;
+    return response.body;
 }
 
 export async function getWeatherRadius(zipcode, distance, token, sortBy, order, day) {
@@ -32,7 +32,6 @@ export async function getOneTrip(zip, token) {
 }
 
 export async function addATrip(trip, token) {
-    console.log(trip);
     const response = await request.post(`${URL}/api/trips`).set('Authorization', token).send( trip );
     return response.body;
 }

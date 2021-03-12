@@ -15,10 +15,13 @@ export default class TripsPage extends Component {
         this.setState({ trips });
     }
     render() {
+        console.log(this.state.trips)
         return (
             <main>
-                <SearchComponent locations={this.state.trips} />
-
+                {this.state.trips.length !== 0
+                    &&
+                    <SearchComponent locations={this.state.trips} />
+                }
 
             </main>
         )

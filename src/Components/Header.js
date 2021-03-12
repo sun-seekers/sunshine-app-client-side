@@ -3,11 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { setToLocalStorage } from '../LocalStorageUtils'
 
 export default class Header extends Component {
-    handleLogOut = () => setToLocalStorage('')
+    handleLogOut = () => {
+        setToLocalStorage('')
+        window.location.reload()
+    }
         
     render() {
         return (
             <header>
+                <div className="header-container">
                  <NavLink
                     to="/about"
                     activeClassName='hidden' >
@@ -37,23 +41,8 @@ export default class Header extends Component {
                         </NavLink>
                     </>
                 }
-                {/* {
-                     !this.props.token && <>
-                        <NavLink
-                            to='/signup'
-                            activeClassName='hidden' >
-                            Sign Up
-                            </NavLink>
-                        <NavLink
-                            to='/login'
-                            activeClassName='hidden' >
-                            Log In
-                        </NavLink>
-                    </>
-                } */}
-               
+               </div>
             </header>
-
         )
     }
 }
