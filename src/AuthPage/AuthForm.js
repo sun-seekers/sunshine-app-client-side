@@ -18,7 +18,7 @@ export default class AuthForm extends Component {
                     <input placeholder="Name" value={name} onChange={handleNameChange} />
                 }
                 <input placeholder="email" value={email} onChange={handleEmailChange} />
-                <input placeholder="password" value={password} onChange={handlePasswordChange} />
+                <input placeholder="password" value={password} type='password' onChange={handlePasswordChange} />
                 <button>Submit</button>
             </form>
 

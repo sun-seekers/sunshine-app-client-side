@@ -58,7 +58,7 @@ export default class App extends Component {
               render={(routerProps) => <AboutPage token={token} {...routerProps} />}
             />
 
-            <PrivateRoute
+            <Route
               path="/search"
               exact
               token={token}

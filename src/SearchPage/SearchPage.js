@@ -6,33 +6,37 @@ import '../App.css';
 
 export default class SearchPage extends Component {
     state = {
-        locations: this.props.locations,
         zipcode: '',
-        distance: 50,
-        sortBy: 'clouds',
-        order: 'asc',
+        distance: 0,
+        sortBy: '',
         day: 0,
         current_zip: this.props.match.params.zip,
         loading: false,
         hawaii: false
     }
-    searchLocations = async () => {
+
+    // componentDidUpdate() {
+    //     if (!this.props.token) this.props.history.push('/')
+    // }
+
+    searchLocations = async (order) => {
         const {
             zipcode,
             distance,
             sortBy,
-            order,
             day
         } = this.state;
 
+        this.setState({ hawaii: false })
+        
         const locations = await getWeatherRadius(zipcode, distance, this.props.token, sortBy, order, day);
 
-        this.setState({ hawaii: true })
+        if (locations.length === 0) this.setState({ hawaii: true })
 
         this.props.handleLocations(locations);
     }
 
-    handleSortChange = e => this.setState({ sortBy: e.target.value });
+    handleSortChange = e => {this.setState({ sortBy: e.target.value }); console.log('It changed')}
 
     handleZipcodeChange = e => this.setState({ zipcode: e.target.value });
 
@@ -42,24 +46,27 @@ export default class SearchPage extends Component {
 
     handleSubmitChange = async e => {
         e.preventDefault();
-
+        
         this.setState({ loading: true })
-
-        await this.searchLocations();
+        
+        console.log(this.state.sortBy);
+        if (this.state.sortBy === 'temperature') 
+        await this.searchLocations('desc')
+        else await this.searchLocations('asc')
 
         this.setState({ loading: false })
     }
 
     render() {
+        console.log(this.state.hawaii);
         const day = new Date();
         const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         const {
             loading,
             distance,
-            locations,
             hawaii,
             sortBy,
-            zipcode
+            zipcode, 
         } = this.state
         return (
             <main>
@@ -71,7 +78,7 @@ export default class SearchPage extends Component {
                     <select
                         value={distance}
                         onChange={this.handleDistanceChange} >
-                        <option value={50}>Distance</option>
+                        <option value={49}>Distance</option>
                         <option value={50}>50 miles</option>
                         <option value={75}>75 miles</option>
                         <option value={100}>100 miles</option>
@@ -83,13 +90,13 @@ export default class SearchPage extends Component {
                     <select
                         value={sortBy}
                         onChange={this.handleSortChange} >
-                        <option value={'clouds'}>Select</option>
-                        <option value={'clouds'}>clouds</option>
-                        <option value={'temperature'}>temperature</option>
-                        <option value={'distance'}>distance</option>
+                        <option value={''}>Sort by</option>
+                        <option value={'clouds'}>Clouds</option>
+                        <option value={'temperature'}>Temperature</option>
+                        <option value={'distance'}>Distance</option>
                     </select>
                     <select
-                        value={day}
+                        value={this.state.day}
                         onChange={this.handleDateChange} >
                         <option value={0}>Today</option>
                         <option value={1}>{weekdays[day.getDay() + 1]}</option>
@@ -104,9 +111,9 @@ export default class SearchPage extends Component {
                 {loading === true
                     && <Spinner />
                 }
-                {loading === false && locations.length !== 0
+                {loading === false 
                     && <SearchComponent
-                        locations={locations}
+                        locations={this.props.locations}
                         hawaii={hawaii}
                         sortBy={sortBy} />
                 }
