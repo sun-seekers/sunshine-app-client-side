@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { addATrip, deleteTrip, getFaveTrips } from '../ApiUtils.js';
+import { addATrip, deleteTrip, getFaveTrips, haveVisited } from '../ApiUtils.js';
 
 
 export default class DetailsPage extends Component {
@@ -32,20 +32,30 @@ export default class DetailsPage extends Component {
     }
 
     isATrip = (location) => {
-        // if (!this.props.token) return true;
+        
 
         const isTrip = this.state.trips.find(trip => trip.zip_code === Number(location.zip_code));
         return Boolean(isTrip);
+    }
+
+    haveVisited = (location) => {
+      
+
+        const isVisit = this.state.trips.find(trip => trip.zip_code === Number(location.zip_code));
+        return Boolean(isVisit);
     }
     handleDelete = async (zipCode) => {
         await deleteTrip(zipCode, this.props.token)
         this.props.history.push('/search')
 
     }
+    handleVisited = async (zipCode) => {
+        await haveVisited(zipCode, this.props.token)
+        this.props.history.push('/search')
+
+    }
 
     render() {
-        console.log(this.state.trips)
-        console.log(this.state.location)
         return (
             <main>
                 {/* <Link to='/search'>Back to search</Link> */}
@@ -60,6 +70,7 @@ export default class DetailsPage extends Component {
                     <p>{this.isATrip(this.state.location)
                         ? <button onClick={() => this.handleDelete(this.state.location.zip_code)}>Remove Trip</button>
                         : <button onClick={() => this.handleTripAdd(this.state.location)}>Add Trip</button>}</p>
+                        <p>{this.haveVisited(this.state.location) ? '☀️' : <button onClick={() => this.handleVisited(this.state.location.zip_code)}>Visited?</button>}</p>
 
 
                 </div>

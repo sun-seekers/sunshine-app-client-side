@@ -8,7 +8,7 @@ export default class SearchPage extends Component {
     state = {
         zipcode: '',
         distance: 0,
-        sortBy: '',
+        sortBy: 'asc',
         day: 0,
         current_zip: this.props.match.params.zip,
         loading: false,
@@ -36,7 +36,9 @@ export default class SearchPage extends Component {
         this.props.handleLocations(locations);
     }
 
-    handleSortChange = e => {this.setState({ sortBy: e.target.value }); console.log('It changed')}
+    handleSortChange = e => {
+        this.setState({ sortBy: e.target.value }); 
+    }
 
     handleZipcodeChange = e => this.setState({ zipcode: e.target.value });
 
@@ -49,10 +51,9 @@ export default class SearchPage extends Component {
         
         this.setState({ loading: true })
         
-        console.log(this.state.sortBy);
-        if (this.state.sortBy === 'temperature') 
-        await this.searchLocations('desc')
-        else await this.searchLocations('asc')
+
+        this.state.sortBy === 'temperature' ? await this.searchLocations('desc') : await this.searchLocations('asc');
+       
 
         this.setState({ loading: false })
     }
@@ -82,10 +83,8 @@ export default class SearchPage extends Component {
                         <option value={50}>50 miles</option>
                         <option value={75}>75 miles</option>
                         <option value={100}>100 miles</option>
-                        <option value={125}>100 miles</option>
+                        <option value={125}>125 miles</option>
                         <option value={150}>150 miles</option>
-                        <option value={175}>175 miles</option>
-                        <option value={200}>200 miles</option>
                     </select>
                     <select
                         value={sortBy}
