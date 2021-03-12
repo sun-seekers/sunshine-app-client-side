@@ -155,7 +155,7 @@ select {
 }
 
 .welcome {
-  max-height: 65vh;
+  max-height: 55vh;
   overflow: auto;
   padding: 20px;
 }
