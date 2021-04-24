@@ -24,6 +24,7 @@ export default class AuthPage extends Component {
             password
         } = this.state;
 
+        // nice way to handle this decision and reduce duplicate code!
         if (this.props.history.location.pathname === '/signup') {
             const user = await signUpUser(name, email, password);
             setToLocalStorage({ name, token: user.token });

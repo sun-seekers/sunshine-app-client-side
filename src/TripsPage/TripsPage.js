@@ -18,9 +18,8 @@ export default class TripsPage extends Component {
         console.log(this.state.trips)
         return (
             <main>
-                {this.state.trips.length !== 0
-                    &&
-                    <SearchComponent locations={this.state.trips} />
+                {this.state.trips.length
+                    && <SearchComponent locations={this.state.trips} />
                 }
 
             </main>

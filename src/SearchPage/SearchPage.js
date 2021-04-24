@@ -26,9 +26,10 @@ export default class SearchPage extends Component {
 
         this.setState({ hawaii: false, display: true })
         
+        // lots of parameters here! at this point, i like to pass an object with keys in, otherwise it gets annoying to remember what the order of arguments is every time
         const locations = await getWeatherRadius(zipcode, distance, this.props.token, sortBy, order, day);
 
-        if (locations.length === 0) this.setState({ hawaii: true })
+        if (!locations.length) this.setState({ hawaii: true })
 
         this.props.handleLocations(locations);
     }
@@ -48,14 +49,18 @@ export default class SearchPage extends Component {
         
         this.setState({ loading: true })
         
-        this.state.sortBy === 'temperature' ? await this.searchLocations('desc') : await this.searchLocations('asc');
+        await this.searchLocations(this.state.sortBy === 'temperature' ? 'desc' : 'asc') 
        
         this.setState({ loading: false })
     }
 
+    weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+    {/* i'm not a module expert, but i think this should let you run through the array multiple times */}
+    getDay = num => day.getDay() + 1 % this.weekdays.length
+
     render() {
         const day = new Date();
-        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         const {
             loading,
             distance,
@@ -75,11 +80,12 @@ export default class SearchPage extends Component {
                         value={distance}
                         onChange={this.handleDistanceChange} >
                         <option value={49}>Distance</option>
-                        <option value={50}>50 miles</option>
-                        <option value={75}>75 miles</option>
-                        <option value={100}>100 miles</option>
-                        <option value={125}>125 miles</option>
-                        <option value={150}>150 miles</option>
+                        {
+                            [50, 75, 100, 125, 150].map(num => 
+                                <option value={num}>
+                                    {num} miles
+                                </option>)
+                        }
                     </select>
                     <select
                         value={sortBy}
@@ -93,12 +99,13 @@ export default class SearchPage extends Component {
                         value={this.state.day}
                         onChange={this.handleDateChange} >
                         <option value={0}>Today</option>
-                        <option value={1}>{weekdays[day.getDay() + 1]}</option>
-                        <option value={2}>{weekdays[day.getDay() + 2]}</option>
-                        <option value={3}>{weekdays[day.getDay() + 3]}</option>
-                        <option value={4}>{weekdays[day.getDay() + 4]}</option>
-                        <option value={5}>{weekdays[day.getDay() + 5]}</option>
-                        <option value={6}>{weekdays[day.getDay() + 6]}</option>
+                        {
+                        [1,2,3,4,5,6]
+                            .map(num => 
+                            <option value={num}>
+                                {weekdays[this.getDay(num)]}
+                            </option>)
+                        }
                     </select>
                     <button>Find Better Weather!</button>
                 </form>
