@@ -12,6 +12,7 @@ export default class DetailsPage extends Component {
         const location = this.state.locations.find(location => location.zip_code === this.props.match.params.zip);
         this.setState({ location });
         await this.fetchTrips();
+        // this is a synchronous function that returns a boolean. doesn't seem like you do anything with it?
         await this.isATrip(location);
     }
 
@@ -53,6 +54,7 @@ export default class DetailsPage extends Component {
     }
 
     render() {
+        // nice destructuring!
         const { location } = this.state
         return (
             <main>
